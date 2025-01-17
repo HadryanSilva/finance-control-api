@@ -1,0 +1,152 @@
+definitions:
+  handler.AccountGetResponse:
+    properties:
+      data:
+        $ref: '#/definitions/model.AccountResponse'
+      message:
+        type: string
+    type: object
+  handler.AccountPostResponse:
+    properties:
+      data:
+        $ref: '#/definitions/model.AccountResponse'
+      message:
+        type: string
+    type: object
+  handler.AccountPutResponse:
+    properties:
+      data:
+        $ref: '#/definitions/model.AccountResponse'
+      message:
+        type: string
+    type: object
+  handler.AccountRequest:
+    properties:
+      balance:
+        type: number
+      name:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  model.AccountResponse:
+    properties:
+      balance:
+        type: number
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /account:
+    get:
+      consumes:
+      - application/json
+      description: Find an account data
+      parameters:
+      - description: Account Identification
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.AccountGetResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Find an account
+      tags:
+      - accounts
+    put:
+      consumes:
+      - application/json
+      description: Update a job opening
+      parameters:
+      - description: Opening identification
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.AccountRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.AccountPutResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update an opening
+      tags:
+      - accounts
+  /accounts:
+    post:
+      consumes:
+      - application/json
+      description: Create a new account
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.AccountRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handler.AccountPostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create an account
+      tags:
+      - accounts
+swagger: "2.0"

@@ -2,8 +2,7 @@ package main
 
 import (
 	"github.com/HadryanSilva/finance-control-api/config"
-	"github.com/gin-gonic/gin"
-	"net/http"
+	"github.com/HadryanSilva/finance-control-api/router"
 )
 
 var (
@@ -18,10 +17,6 @@ func main() {
 		logger.Errf("Error initializing config: %v", err)
 		return
 	}
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+
+	router.Initialize()
 }
