@@ -7,7 +7,7 @@ import (
 )
 
 func InitPostgres() (*gorm.DB, error) {
-	dsn := "host=localhost user=postgres= password=postgres dbname=postgres search_path=finance_db"
+	dsn := "host=localhost user=postgres password=postgres dbname=postgres search_path=finance_db"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
